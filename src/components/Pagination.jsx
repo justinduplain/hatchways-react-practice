@@ -1,11 +1,10 @@
-import "../css/pagination.scss";
-
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/outline";
-import usePagination, { DOTS } from "../hooks/usePagination";
-
-import PropTypes from "prop-types";
 import React from "react";
+import PropTypes from "prop-types";
 import { nanoid } from "nanoid";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/outline";
+
+import "../css/pagination.scss";
+import usePagination, { DOTS } from "../hooks/usePagination";
 
 function Pagination({
   onPageChange,
