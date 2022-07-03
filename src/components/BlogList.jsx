@@ -9,23 +9,27 @@ function BlogList() {
   // Declares a state variable for rows to display
   const [postsPerPage, setPostsPerPage] = useState(15);
   // Declare a state variable to hold displayed blog posts
-  const [displayedBlogPosts, setDisplayedBlogPosts] = useState([]);
-  // const currentPaginationData = blogs.posts.slice(0, 15);
+  const [currentPaginationData, setCurrentPaginationData] = useState([]);
+  // Declare a state variable to hold the current page information
+  const [currentPage, setCurrentPage] = useState(1);
 
-  // watch for changes to displayedBlogPosts state variable
+  // watch for changes to postsPerPage and update displayed post data as needed
   useEffect(() => {
-    setDisplayedBlogPosts(blogs.posts.slice(0, postsPerPage));
+    setCurrentPaginationData(blogs.posts.slice(0, postsPerPage));
   }, [postsPerPage]);
 
   const updateRowsPerPage = (rows) => {
     setPostsPerPage(rows);
   };
-  const updatePage = () => {};
+
+  const updatePage = (selected) => {
+    setCurrentPage(selected);
+  };
 
   return (
     <div>
       <Pagination
-        currentPage={1}
+        currentPage={currentPage}
         totalCount={blogs.posts.length}
         pageSize={postsPerPage}
         pageSizeOptions={PAGE_SIZES}
@@ -36,7 +40,7 @@ function BlogList() {
         // Do not remove the aria-label below, it is used for Hatchways automation.
         aria-label="blog list"
       >
-        {displayedBlogPosts.map((blog) => (
+        {currentPaginationData.map((blog) => (
           <BlogPost
             key={blog.id}
             author={blog.author}
