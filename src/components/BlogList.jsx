@@ -6,16 +6,21 @@ import blogs from "../data/blogs.json";
 const PAGE_SIZES = [15, 25, 50, 100];
 
 function BlogList() {
-  // Declares a state variable for rows to display
-  const [postsPerPage, setPostsPerPage] = useState(15);
-  // Declare a state variable to hold displayed blog posts
+  // number of blog posts to display per page
+  const [postsPerPage, setPostsPerPage] = useState(PAGE_SIZES[0]);
+  // currently displayed blog posts
   const [currentPaginationData, setCurrentPaginationData] = useState([]);
-  // Declare a state variable to hold the current page information
+  // the current page displayed
   const [currentPage, setCurrentPage] = useState(1);
+  // tracks the last page available
+  const [maxPage, setMaxPage] = useState(1);
 
   // watch for changes to postsPerPage and update displayed post data as needed
   useEffect(() => {
+    // sets the appropriate blog posts for the current page
     setCurrentPaginationData(blogs.posts.slice(0, postsPerPage));
+    // sets the max page number based on selected page size (postsPerPage)
+    setMaxPage(Math.ceil(blogs.posts.length / postsPerPage));
   }, [postsPerPage]);
 
   const updateRowsPerPage = (rows) => {
@@ -32,6 +37,7 @@ function BlogList() {
         currentPage={currentPage}
         totalCount={blogs.posts.length}
         pageSize={postsPerPage}
+        maxPage={maxPage}
         pageSizeOptions={PAGE_SIZES}
         onPageChange={updatePage}
         onPageSizeOptionChange={updateRowsPerPage}

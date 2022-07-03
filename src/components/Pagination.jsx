@@ -12,6 +12,7 @@ function Pagination({
   totalCount,
   currentPage,
   pageSize,
+  maxPage,
   pageSizeOptions,
 }) {
   const paginationRange = usePagination({
@@ -41,7 +42,7 @@ function Pagination({
           // Do not remove the aria-label below, it is used for Hatchways automation.
           aria-label="Goto previous page"
           onClick={onPrevious}
-          disabled={false} // change this line to disable a button.
+          disabled={currentPage === 1}
         >
           <ChevronLeftIcon />
         </button>
