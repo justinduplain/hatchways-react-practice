@@ -1,14 +1,13 @@
 export const DOTS = "...";
 
-function usePagination() {
-  /*
-    Rewrite the logic here to map out the pagination to be displayed
+/**
+ * Returns pagination data based on currently selected details
+ */
+function usePagination({ currentPage, pageSize, totalCount }) {
+  console.log(currentPage, pageSize, totalCount);
+  const max = Math.ceil(totalCount / pageSize);
 
-    !!!!!! ATTENTION !!!!!!
-    Please replace this comment here with a description of this hook.
-    
-  */
-  return [1, 2, 3, DOTS, 5];
+  return [1, 2, 3, 4, 5, 6, DOTS, max];
 }
 
 export default usePagination;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { nanoid } from "nanoid";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/outline";
@@ -12,14 +12,27 @@ function Pagination({
   totalCount,
   currentPage,
   pageSize,
-  maxPage,
   pageSizeOptions,
 }) {
-  const paginationRange = usePagination({
-    currentPage,
-    totalCount,
-    pageSize,
-  });
+  // Declares a state variable for pagination details
+  const [paginationRange, setPaginationRange] = useState(
+    usePagination({
+      currentPage,
+      totalCount,
+      pageSize,
+    })
+  );
+
+  // watch for changes and update pagination data as needed
+  useEffect(() => {
+    setPaginationRange(
+      usePagination({
+        currentPage,
+        totalCount,
+        pageSize,
+      })
+    );
+  }, [currentPage, pageSize]);
 
   const onNext = () => {
     onPageChange(currentPage + 1);
@@ -42,7 +55,7 @@ function Pagination({
           // Do not remove the aria-label below, it is used for Hatchways automation.
           aria-label="Goto previous page"
           onClick={onPrevious}
-          disabled={currentPage === 1}
+          disabled={currentPage === 1} // disables the left arrow if on the first page
         >
           <ChevronLeftIcon />
         </button>
@@ -84,7 +97,7 @@ function Pagination({
           // Do not remove the aria-label below, it is used for Hatchways automation.
           aria-label="Goto next page"
           onClick={onNext}
-          disabled={false} // change this line to disable a button.
+          disabled={currentPage === paginationRange.slice(-1)[0]} // disables next on the last page
         >
           <ChevronRightIcon />
         </button>
