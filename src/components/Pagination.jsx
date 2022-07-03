@@ -95,7 +95,8 @@ function Pagination({
         aria-label="Select page size"
         value={pageSize}
         onChange={(e) => {
-          onPageSizeOptionChange(e.target.value);
+          //uses parseInt to avoid react error: failed prop type
+          onPageSizeOptionChange(parseInt(e.target.value));
         }}
       >
         {pageSizeOptions.map((size) => (
