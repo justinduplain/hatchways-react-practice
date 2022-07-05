@@ -76,7 +76,7 @@ function Pagination({
           <li
             key={key}
             className="paginationItem"
-            aria-current="false" // change this line to highlight a current page.
+            aria-current={pageNumber === currentPage ? "page" : false} // sets true if current page
           >
             <button
               type="button"
@@ -111,6 +111,8 @@ function Pagination({
         onChange={(e) => {
           //uses parseInt to avoid react error: failed prop type
           onPageSizeOptionChange(parseInt(e.target.value));
+          // sets the current page to 1 when the page size is changed
+          onPageChange(1);
         }}
       >
         {pageSizeOptions.map((size) => (

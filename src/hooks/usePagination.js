@@ -1,10 +1,12 @@
 export const DOTS = "..."; //ellipsis
 
 /**
- * Function: Returns pagination data based on currently selected details:
+ * usePagination: Custom hook that returns pagination data based on
+ * currently selected details:
  * - Uses a set to avoid duplicates
  * - Formats the set data to be used in the pagination component
  * - Adds ellipsis to gaps (ie. non-siblings from the set)
+ * - returns an array of page numbers with appropriate ellispsis
  */
 
 function usePagination({ currentPage, pageSize, totalCount }) {
@@ -50,18 +52,15 @@ function usePagination({ currentPage, pageSize, totalCount }) {
       // inserting ellipsis between gaps
       .reduce(
         (pgsAccum, pgNum) => {
-          // handles the first page
-          if (pgNum === 1) {
-            return pgsAccum;
-          }
-          // adds the current page# if it is a sibling of the previous
+          // handles the first page, which already exists
+          if (pgNum === 1) return pgsAccum;
+          // adds the page if a sibling of previous page
           if (pgNum - pgsAccum[pgsAccum.length - 1] === 1) {
             pgsAccum.push(pgNum);
             return pgsAccum;
           } else {
-            // otherwise, add ellipsis
+            // if not a sibling, adds ellipsis
             pgsAccum.push(DOTS);
-            // and add the current page number
             pgsAccum.push(pgNum);
             return pgsAccum;
           }
