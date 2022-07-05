@@ -19,7 +19,7 @@ Working with Async functions like an API call would necessitate using React's us
 
 ##### Other Considerations
 
-I would consider implementing some kind of global state management tool such as Redux. This would help to maintain the state accross the application as multiple Async requests come in to play. As a bonus, these tools can also include useful features like memoization. This can make the application perform better by limiting additional identical requests to the API. Finally, it helps to seperate MVC portions of the application: the functional logic (controller) is placed into reducers and is separate from the displayed components (view).
+I would consider implementing some kind of global state management tool such as Redux. This would help to maintain state as multiple Async requests come in to play. As a bonus, these tools can also include useful features like memoization. This can make the application perform better by limiting additional identical requests to the API. Finally, it helps to seperate MVC portions of the application: the functional logic (controller) is placed into reducers and is separate from the displayed components (view).
 
 ### Q2. Part of this application uses the package [nanoid](https://www.npmjs.com/package/nanoid) to generate keys. What issue would this cause for generating keys in React?
 
