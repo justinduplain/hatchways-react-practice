@@ -9,17 +9,17 @@
 If this data were coming from an API instead of a JSON file, considerations would have to account for the ASYNC nature of an API request.
 
 - The function would have to be written as an Async/Await function call
-- May want to build some loading animations into UI while awaiting data
+- We may want to build some loading animations into UI while awaiting data
 - The function would have to account for error handling
-  - Possibly include some kind of error feedback in the UI
+  - And we would possibly want to include some kind of error feedback in the UI
 
 ##### Using the useEffect hook for an API Call
 
-Working with Async functions like an API call would necessitate using React's useEffect hook. The useEffect hook allows us to update the state or components once the Async function eventually returns the requested data. Additionlly, useEffect can watch for future data changes and update appropriate state/props/components when that happens.
+Working with Async functions like an API call would necessitate using React's useEffect hook. The useEffect hook allows us to update the state or components once the Async function eventually returns the requested data. Additionally, useEffect can watch for future data changes and update appropriate state/props/components when that happens.
 
 ##### Other Considerations
 
-I would consider implementing some kind of state management tool such as the React useContext API or Redux. This would help to maintain the state accross the application as multiple Async requests come in to play. Additionally, these tools can also include useful features like memoization. This can make the application perform better by limiting additional identical requests to the API.
+I would consider implementing some kind of global state management tool such as Redux. This would help to maintain the state accross the application as multiple Async requests come in to play. As a bonus, these tools can also include useful features like memoization. This can make the application perform better by limiting additional identical requests to the API. Finally, it helps to seperate MVC portions of the application: the functional logic (controller) is placed into reducers and is separate from the displayed components (view).
 
 ### Q2. Part of this application uses the package [nanoid](https://www.npmjs.com/package/nanoid) to generate keys. What issue would this cause for generating keys in React?
 
