@@ -21,6 +21,12 @@ Working with Async functions like an API call would necessitate using React's us
 
 I would consider implementing some kind of global state management tool such as Redux. This would help to maintain state as multiple Async requests come in to play. As a bonus, these tools can also include useful features like memoization. This can make the application perform better by limiting additional identical requests to the API. Finally, it helps to seperate MVC portions of the application: the functional logic (controller) is placed into reducers and is separate from the displayed components (view).
 
+> How could you improve your current solution if the number of blog posts was really large (for example 10,000)?
+
+This would require some attention to the UI, for example: Paging through 1000+ pages of posts seems unreasonable; would we provide another way to filter or display the posts? Does ordinal pagination still make the most sense in this case, or should we consider a "load more" or "infinite" style of display? Would we request the full count from the database, or only display that there are more pages than would reasonably be expected (eg. page 5 of more than 1,000 vs. page 5 of 2,127). 
+
+Assuming that we were actually pulling these posts from a database, I would want to have access to a pagination API. This would return only a limited number of blog posts. This greatly reduces the amount of data being loaded by the client at one time and can improve performance.
+
 ### Q2. Part of this application uses the package [nanoid](https://www.npmjs.com/package/nanoid) to generate keys. What issue would this cause for generating keys in React?
 
 #### Q2 Answer:
