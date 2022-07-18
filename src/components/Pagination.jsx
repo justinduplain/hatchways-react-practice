@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
 import { nanoid } from "nanoid";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/outline";
@@ -14,24 +14,15 @@ function Pagination({
   pageSize,
   pageSizeOptions,
 }) {
-  // Declares a state variable for pagination details
-  const [paginationRange, setPaginationRange] = useState(
-    usePagination({
-      currentPage,
-      totalCount,
-      pageSize,
-    })
+  const memoizedPagination = useMemo(
+    () => usePagination({ currentPage, totalCount, pageSize }),
+    [currentPage, pageSize]
   );
 
-  // watch for changes and update pagination data as needed
+  const [paginationRange, setPaginationRange] = useState(memoizedPagination);
+
   useEffect(() => {
-    setPaginationRange(
-      usePagination({
-        currentPage,
-        totalCount,
-        pageSize,
-      })
-    );
+    setPaginationRange(memoizedPagination);
   }, [currentPage, pageSize]);
 
   const onNext = () => {
@@ -55,7 +46,7 @@ function Pagination({
           // Do not remove the aria-label below, it is used for Hatchways automation.
           aria-label="Goto previous page"
           onClick={onPrevious}
-          disabled={currentPage === 1} // disables the left arrow if on the first page
+          disabled={currentPage === 1}
         >
           <ChevronLeftIcon />
         </button>
@@ -76,7 +67,7 @@ function Pagination({
           <li
             key={key}
             className="paginationItem"
-            aria-current={pageNumber === currentPage ? "page" : false} // sets current page status
+            aria-current={pageNumber === currentPage ? "page" : false}
           >
             <button
               type="button"
@@ -97,7 +88,7 @@ function Pagination({
           // Do not remove the aria-label below, it is used for Hatchways automation.
           aria-label="Goto next page"
           onClick={onNext}
-          disabled={currentPage === paginationRange.slice(-1)[0]} // disables next on the last page
+          disabled={currentPage === paginationRange[paginationRange.length - 1]}
         >
           <ChevronRightIcon />
         </button>
@@ -109,9 +100,7 @@ function Pagination({
         aria-label="Select page size"
         value={pageSize}
         onChange={(e) => {
-          //uses parseInt to avoid react error: failed prop type
           onPageSizeOptionChange(parseInt(e.target.value));
-          // sets the current page to 1 when the page size is changed
           onPageChange(1);
         }}
       >

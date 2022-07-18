@@ -23,7 +23,7 @@ I would consider implementing some kind of global state management tool such as 
 
 > How could you improve your current solution if the number of blog posts was really large (for example 10,000)?
 
-This would require some attention to the UI, for example: Paging through 1000+ pages of posts seems unreasonable; would we provide another way to filter or display the posts? Does ordinal pagination still make the most sense in this case, or should we consider a "load more" or "infinite" style of display? Would we request the full count from the database, or only display that there are more pages than would reasonably be expected (eg. page 5 of more than 1,000 vs. page 5 of 2,127). 
+This would require some attention to the UI, for example: Paging through 1000+ pages of posts seems unreasonable; would we provide another way to filter or display the posts? Does ordinal pagination still make the most sense in this case, or should we consider a "load more" or "infinite scroll" style of display? Would we request the full count from the database, or only display that there are more pages than would reasonably be expected (eg. page 5 of more than 1,000 vs. page 5 of 2,127).
 
 Assuming that we were actually pulling these posts from a database, I would want to have access to a pagination API. This would return only a limited number of blog posts. This greatly reduces the amount of data being loaded by the client at one time and can improve performance.
 
