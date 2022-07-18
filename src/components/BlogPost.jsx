@@ -11,8 +11,7 @@ function BlogPost({ author, title, excerpt }) {
           <img
             className="authorImage"
             src={`https://joeschmoe.io/api/v1/${author}`}
-            alt={`${author} avatar`}
-            title={author}
+            alt="Author"
           />
           <p variant="body">{author}</p>
         </div>
