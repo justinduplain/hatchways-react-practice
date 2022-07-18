@@ -25,6 +25,6 @@ I would consider implementing some kind of global state management tool such as 
 
 #### Q2 Answer:
 
-Nanoid is not recommended for generating React keys, as each re-render generates a new nanoid, whereas React keys are supposed to stay consistent across renders. Using nanoid could cause instability in React applications. Instead, a consistent stable ID from the object should be used.
+Nanoid is not recommended for generating React keys, as each re-render generates a new nanoid, whereas React keys are supposed to stay consistent across renders. Using nanoid could cause instability in React applications. Instead, a consistent 'stable ID' from the object should be used. A stable ID is a unique and unchanging identifier. React expects a key to be a string that distinguishes an item from its siblings. Some examples of stable IDs are: a user ID, a database entry ID, or a post ID.
 
 Additional details are are available in [nanoid's React Documentation](https://github.com/ai/nanoid#react).
