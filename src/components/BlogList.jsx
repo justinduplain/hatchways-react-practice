@@ -7,7 +7,6 @@ const PAGE_SIZES = [15, 25, 50, 100];
 
 function BlogList() {
   const [postsPerPage, setPostsPerPage] = useState(PAGE_SIZES[0]);
-  const [currentPaginationData, setCurrentPaginationData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
   const getPaginationData = (currentPage, postsPerPage) => {
@@ -20,10 +19,6 @@ function BlogList() {
     () => getPaginationData(currentPage, postsPerPage),
     [currentPage, postsPerPage]
   );
-
-  useEffect(() => {
-    setCurrentPaginationData(memoizedPaginationData);
-  }, [postsPerPage, currentPage]);
 
   const updateRowsPerPage = (rows) => {
     setPostsPerPage(rows);
@@ -47,7 +42,7 @@ function BlogList() {
         // Do not remove the aria-label below, it is used for Hatchways automation.
         aria-label="blog list"
       >
-        {currentPaginationData.map((blog) => (
+        {memoizedPaginationData.map((blog) => (
           <BlogPost
             key={blog.id}
             author={blog.author}
