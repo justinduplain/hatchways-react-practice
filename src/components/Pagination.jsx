@@ -13,17 +13,18 @@ function Pagination({
   currentPage,
   pageSize,
   pageSizeOptions,
+  filters,
 }) {
   const memoizedPagination = useMemo(
     () => usePagination({ currentPage, totalCount, pageSize }),
-    [currentPage, pageSize]
+    [currentPage, pageSize, filters]
   );
 
   const [paginationRange, setPaginationRange] = useState(memoizedPagination);
 
   useEffect(() => {
     setPaginationRange(memoizedPagination);
-  }, [currentPage, pageSize]);
+  }, [currentPage, pageSize, filters]);
 
   const onNext = () => {
     onPageChange(currentPage + 1);

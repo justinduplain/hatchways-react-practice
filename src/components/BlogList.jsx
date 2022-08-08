@@ -23,7 +23,7 @@ function BlogList({ filters }) {
 
   const memoizedPaginatedPosts = useMemo(
     () => getPaginatedPosts(currentPage, postsPerPage),
-    [currentPage, postsPerPage, memoizedBlogData]
+    [currentPage, postsPerPage, memoizedBlogData, filters]
   );
 
   const updateRowsPerPage = (rows) => {
@@ -43,6 +43,7 @@ function BlogList({ filters }) {
         pageSizeOptions={PAGE_SIZES}
         onPageChange={updatePage}
         onPageSizeOptionChange={updateRowsPerPage}
+        filters={filters}
       />
       <ul
         // Do not remove the aria-label below, it is used for Hatchways automation.
