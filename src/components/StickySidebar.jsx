@@ -13,13 +13,13 @@ const exampleFooter = [
   "About",
 ];
 
-function StickySidebar() {
+function StickySidebar({ selectTags }) {
   return (
     <div className="sidebar">
       <p>discover more of what matters to you</p>
       <div className="tagWrapper">
         {blogs.tags.map((tag) => (
-          <div className="tag" key={tag}>
+          <div className="tag" key={tag} onClick={() => selectTags(tag)}>
             {tag}
           </div>
         ))}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import BlogPost from "./BlogPost";
 import Pagination from "./Pagination";
 import useFilteredBlogData from "../hooks/useFilteredBlogData";
@@ -6,14 +6,13 @@ import blogs from "../data/blogs.json";
 
 const PAGE_SIZES = [15, 25, 50, 100];
 
-function BlogList() {
+function BlogList({ filters }) {
   const [postsPerPage, setPostsPerPage] = useState(PAGE_SIZES[0]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [currentFilters, setCurrentFilters] = useState([]);
 
   const memoizedBlogData = useMemo(
-    () => useFilteredBlogData({ tags: ["tech", "health"] }),
-    []
+    () => useFilteredBlogData({ tags: filters }),
+    [filters]
   );
 
   const getPaginatedPosts = (currentPage, postsPerPage) => {
@@ -24,7 +23,7 @@ function BlogList() {
 
   const memoizedPaginatedPosts = useMemo(
     () => getPaginatedPosts(currentPage, postsPerPage),
-    [currentPage, postsPerPage]
+    [currentPage, postsPerPage, memoizedBlogData]
   );
 
   const updateRowsPerPage = (rows) => {
