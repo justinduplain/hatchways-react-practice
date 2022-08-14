@@ -6,7 +6,6 @@ import blogs from "../data/blogs.json";
  */
 
 function useFilteredBlogData({ tags = [] }) {
-  console.log("tags: ", tags);
   if (tags && tags.length === 0) {
     return blogs.posts;
   } else

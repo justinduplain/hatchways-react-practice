@@ -1,6 +1,7 @@
 import React from "react";
 import blogs from "../data/blogs.json";
 import "../css/sidebar.scss";
+import SidebarTag from "./SidebarTag";
 
 const exampleFooter = [
   "Help",
@@ -19,9 +20,7 @@ function StickySidebar({ selectTags }) {
       <p>discover more of what matters to you</p>
       <div className="tagWrapper">
         {blogs.tags.map((tag) => (
-          <div className="tag" key={tag} onClick={() => selectTags(tag)}>
-            {tag}
-          </div>
+          <SidebarTag selectTags={selectTags} tag={tag} key={tag} />
         ))}
       </div>
       <div className="tagWrapper">
